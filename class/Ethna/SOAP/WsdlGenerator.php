@@ -158,7 +158,7 @@ EOD;
             Ethna_SOAP_Util::fixRetval($form->retval);
 
             // シリアライズ
-            $retval_name = preg_replace('/_(.)/e', "strtoupper('\$1')", ucfirst($k)) . "Result";
+            $retval_name = preg_replace_callback('/_(.)/', function(array $matches){return strtoupper($matches[1]);}, ucfirst($k)) . "Result";
             $types .= $this->_serializeTypes($form->retval, $retval_name);
         }
 
